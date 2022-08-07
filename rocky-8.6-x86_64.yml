@@ -1,0 +1,13 @@
+name: Rocky Linux
+downloads:
+  - https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.6-x86_64-dvd1.iso
+documentation: https://docs.rockylinux.org
+architecture: x86_64
+release: "8"
+version: "8.6"
+hardware:
+  memory: 2048
+  storage: 8192
+  processors:
+    count: 1
+    cores: 1

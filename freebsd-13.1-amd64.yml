@@ -1,0 +1,13 @@
+name: FreeBSD
+downloads:
+  - https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/13.1/FreeBSD-13.1-RELEASE-amd64-dvd1.iso
+documentation: https://www.freebsd.org/docs/
+architecture: amd64
+release: 13
+version: 13.1
+hardware:
+  memory: 2048
+  storage: 8192
+  processors:
+    count: 1
+    cores: 1

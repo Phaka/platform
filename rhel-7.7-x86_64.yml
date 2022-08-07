@@ -1,0 +1,13 @@
+name: Red Hat Enterprise Linux
+downloads:
+  - https://developers.redhat.com/content-gateway/file/rhel-server-7.7-x86_64-dvd.iso
+documentation: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6
+architecture: x86_64
+release: "7"
+version: "7.7"
+hardware:
+  memory: 2048
+  storage: 8192
+  processors:
+    count: 1
+    cores: 1

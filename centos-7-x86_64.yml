@@ -1,0 +1,13 @@
+name: CentOS
+downloads:
+  - http://mirror.fcix.net/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Everything-2009.iso
+documentation: https://docs.centos.org/en-US/docs/
+architecture: x86_64
+release: 7
+version: 7.9
+hardware:
+  memory: 2048
+  storage: 2560
+  processors:
+    count: 1
+    cores: 1

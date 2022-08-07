@@ -1,0 +1,13 @@
+name: Red Hat Enterprise Linux
+downloads:
+  - https://developers.redhat.com/content-gateway/file/rhel-9.0-x86_64-dvd.iso
+documentation: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9
+architecture: x86_64
+release: "9"
+version: "9.0"
+hardware:
+  memory: 2048
+  storage: 8192
+  processors:
+    count: 1
+    cores: 1

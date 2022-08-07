@@ -1,0 +1,13 @@
+name: Photon OS
+downloads:
+  - https://packages.vmware.com/photon/4.0/Rev2/iso/photon-4.0-c001795b8.iso
+documentation: https://vmware.github.io/photon/assets/files/html/3.0/
+architecture: x86_64
+release: "4"
+version: "4.0"
+hardware:
+  memory: 2048
+  storage: 8192
+  processors:
+    count: 1
+    cores: 1

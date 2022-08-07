@@ -1,0 +1,13 @@
+name: DragonFly BSD
+downloads:
+  - https://mirror-master.dragonflybsd.org/iso-images/dfly-x86_64-6.2.2_REL.iso
+documentation: https://www.dragonflybsd.org/docs/
+architecture: x86_64
+release: 6.2
+version: 6.2.2
+hardware:
+  memory: 4096
+  storage: 2560
+  processors:
+    count: 1
+    cores: 2

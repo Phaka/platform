@@ -1,0 +1,13 @@
+name: AlmaLinux
+downloads:
+  - http://mirror.fcix.net/almalinux/8.6/isos/x86_64/AlmaLinux-8.6-x86_64-dvd.iso
+documentation: https://wiki.almalinux.org
+architecture: x86_64
+release: 8
+version: 8.6
+hardware:
+  memory: 2048
+  storage: 40960
+  processors:
+    count: 1
+    cores: 1

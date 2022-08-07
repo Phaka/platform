@@ -1,0 +1,13 @@
+name: FreeBSD
+downloads:
+  - https://download.freebsd.org/releases/i386/i386/ISO-IMAGES/13.0/FreeBSD-13.0-RELEASE-i386-dvd1.iso
+documentation: https://www.freebsd.org/docs/
+architecture: i386
+release: 13
+version: 13.0
+hardware:
+  memory: 2048
+  storage: 8192
+  processors:
+    count: 1
+    cores: 1

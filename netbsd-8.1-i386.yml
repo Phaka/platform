@@ -1,0 +1,13 @@
+name: NetBSD
+downloads:
+  - https://cdn.netbsd.org/pub/NetBSD/NetBSD-8.1/images/NetBSD-8.1-i386.iso
+documentation: https://www.netbsd.org/docs/guide/en/
+architecture: i386
+release: 8
+version: 8.1
+hardware:
+  memory: 2048
+  storage: 8192
+  processors:
+    count: 1
+    cores: 1

@@ -1,0 +1,13 @@
+name: NetBSD
+downloads:
+  - https://cdn.netbsd.org/pub/NetBSD/NetBSD-9.2/images/NetBSD-9.2-amd64.iso
+documentation: https://www.netbsd.org/docs/guide/en/
+architecture: amd64
+release: 9
+version: 9.2
+hardware:
+  memory: 2048
+  storage: 8192
+  processors:
+    count: 1
+    cores: 1

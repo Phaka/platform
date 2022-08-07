@@ -1,0 +1,15 @@
+name: Debian
+downloads:
+  - https://cdimage.debian.org/mirror/cdimage/archive/10.12.0/i386/iso-dvd/debian-10.12.0-i386-DVD-1.iso
+  - https://cdimage.debian.org/mirror/cdimage/archive/10.12.0/i386/iso-dvd/debian-10.12.0-i386-DVD-2.iso
+  - https://cdimage.debian.org/mirror/cdimage/archive/10.12.0/i386/iso-dvd/debian-10.12.0-i386-DVD-3.iso
+documentation: https://www.debian.org/doc/
+architecture: i386
+release: 10
+version: 10.12.0
+hardware:
+  memory: 780
+  storage: 2560
+  processors:
+    count: 1
+    cores: 1

@@ -1,0 +1,13 @@
+name: Photon OS
+downloads:
+  - https://packages.vmware.com/photon/3.0/Rev3/iso/photon-3.0-a383732.iso
+documentation: https://vmware.github.io/photon/assets/files/html/3.0/
+architecture: x86_64
+release: "3"
+version: "3.0"
+hardware:
+  memory: 2048
+  storage: 8192
+  processors:
+    count: 1
+    cores: 1

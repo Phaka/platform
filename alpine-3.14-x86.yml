@@ -1,0 +1,13 @@
+name: Alpine Linux
+downloads:
+  - https://dl-cdn.alpinelinux.org/alpine/v3.14/releases/x86/alpine-extended-3.14.7-x86.iso
+documentation: https://docs.alpinelinux.org/user-handbook/0.1a/index.html
+architecture: x86
+release: 3.14
+version: 3.14.7
+hardware:
+  memory: 512
+  storage: 2560
+  processors:
+    count: 1
+    cores: 1

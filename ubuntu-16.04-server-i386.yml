@@ -1,0 +1,14 @@
+name: Ubuntu
+flavor: Server
+downloads:
+  - https://releases.ubuntu.com/16.04/ubuntu-16.04.6-server-i386.iso
+documentation: https://ubuntu.com/server/docs
+architecture: i386
+release: 16.04
+version: 16.04.6
+hardware:
+  memory: 512
+  storage: 2560
+  processors:
+    count: 1
+    cores: 1

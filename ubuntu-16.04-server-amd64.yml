@@ -1,0 +1,14 @@
+name: Ubuntu
+flavor: Server
+downloads:
+  - https://releases.ubuntu.com/16.04/ubuntu-16.04.7-server-amd64.iso
+documentation: https://ubuntu.com/server/docs
+architecture: amd64
+release: 16.04
+version: 16.04.7
+hardware:
+  memory: 512
+  storage: 2560
+  processors:
+    count: 1
+    cores: 1

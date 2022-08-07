@@ -1,0 +1,12 @@
+name: CentOS
+downloads:
+  - http://ridgewireless.mm.fcix.net/centos/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-latest-dvd1.iso
+documentation: https://docs.centos.org/en-US/docs/
+architecture: x86_64
+release: 8
+hardware:
+  memory: 2048
+  storage: 2560
+  processors:
+    count: 1
+    cores: 1

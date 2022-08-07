@@ -1,0 +1,13 @@
+name: Debian
+downloads:
+  - https://cdimage.debian.org/mirror/cdimage/release/11.4.0/amd64/iso-dvd/debian-11.4.0-amd64-DVD-1.iso
+documentation: https://www.debian.org/doc/
+architecture: amd64
+release: 11
+version: 11.4.0
+hardware:
+  memory: 780
+  storage: 2560
+  processors:
+    count: 1
+    cores: 1

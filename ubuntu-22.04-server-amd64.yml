@@ -1,0 +1,14 @@
+name: Ubuntu
+flavor: Server
+downloads:
+  - https://releases.ubuntu.com/22.04/ubuntu-22.04-live-server-amd64.iso
+documentation: https://ubuntu.com/server/docs
+architecture: amd64
+release: 22.04
+version: 22.04
+hardware:
+  memory: 512
+  storage: 2560
+  processors:
+    count: 1
+    cores: 1
