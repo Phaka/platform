@@ -3,8 +3,8 @@ downloads:
   - https://mirrors.ocf.berkeley.edu/pub/OpenBSD/7.1/i386/install71.iso
 documentation: https://www.openbsd.org/faq/index.html
 architecture: i386
-release: 7
-version: 7.1
+release: "7.1"
+version: "7.1"
 hardware:
   memory: 2048
   storage: 8192

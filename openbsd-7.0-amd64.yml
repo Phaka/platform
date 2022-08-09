@@ -3,8 +3,8 @@ downloads:
   - https://mirrors.ocf.berkeley.edu/pub/OpenBSD/7.0/amd64/install70.iso
 documentation: https://www.openbsd.org/faq/index.html
 architecture: amd64
-release: 7
-version: 7.0
+release: "7.0"
+version: "7.0"
 hardware:
   memory: 2048
   storage: 8192
