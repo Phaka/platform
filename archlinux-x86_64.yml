@@ -1,0 +1,11 @@
+name: Arch Linux
+architecture: x86_64
+downloads:
+    - http://mirror.rackspace.com/archlinux/iso/2022.08.05/archlinux-x86_64.iso
+documentation: https://wiki.archlinux.org/title/Installation_guide
+hardware:
+    memory: 780
+    storage: 2560
+    processors:
+        count: 1
+        cores: 1
