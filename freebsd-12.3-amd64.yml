@@ -1,13 +1,13 @@
 name: FreeBSD
-downloads:
-  - https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/12.3/FreeBSD-12.3-RELEASE-amd64-dvd1.iso
-documentation: https://www.freebsd.org/docs/
+version: "12.3"
 architecture: amd64
-release: 12
-version: 12.3
+release: "12"
+downloads:
+    - https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/12.3/FreeBSD-12.3-RELEASE-amd64-dvd1.iso
+documentation: https://www.freebsd.org/docs/
 hardware:
-  memory: 2048
-  storage: 8192
-  processors:
-    count: 1
-    cores: 1
+    memory: 2048
+    storage: 8192
+    processors:
+        count: 1
+        cores: 1

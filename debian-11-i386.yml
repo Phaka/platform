@@ -1,13 +1,13 @@
 name: Debian
-downloads:
-  - https://cdimage.debian.org/debian-cd/11.4.0/i386/iso-dvd/debian-11.4.0-i386-DVD-1.iso
-documentation: https://www.debian.org/doc/
-architecture: i386
-release: 11
 version: 11.4.0
+architecture: i386
+release: "11"
+downloads:
+    - https://cdimage.debian.org/debian-cd/11.4.0/i386/iso-dvd/debian-11.4.0-i386-DVD-1.iso
+documentation: https://www.debian.org/doc/
 hardware:
-  memory: 780
-  storage: 2560
-  processors:
-    count: 1
-    cores: 1
+    memory: 780
+    storage: 2560
+    processors:
+        count: 1
+        cores: 1

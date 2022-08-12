@@ -27,34 +27,54 @@ hardware:
   processors:
     count: 1
     cores: 1
+hypervisors:
+  vsphere:
+    disk_controller_type: lsilogic
+    firmware: bios
+    guest_os_type: otherGuest64
+    network_adapter_type: vmxnet3
 ```
 
 The fields:
 
-Name | Required | Notes
----------|----------|---------
- name | yes | The name of the operating system
- flavor | no | The flavor of the operating system
- downloads | yes | URLs where to download the operating system from
- architecture | yes | The architecture of the platform, for example `amd64`, `i386`, `mips`, `mips64`, `mips64le`
- release | no | The release of the operating system. When omitted it's assumed it's a rolling release, like *Arch Linux*.
- version | no | The version of the operating system. When omitted it's assumed its a rolling version, such as *CentOS 8 Stream* and *CentOS 9 Stream*.
- hardware | no | the minimum hardware requirements
+| Name         | Required | Notes                                                                                                                                  |
+|--------------|----------|----------------------------------------------------------------------------------------------------------------------------------------|
+| name         | yes      | The name of the operating system                                                                                                       |
+| flavor       | no       | The flavor of the operating system                                                                                                     |
+| downloads    | yes      | URLs where to download the operating system from                                                                                       |
+| architecture | yes      | The architecture of the platform, for example `amd64`, `i386`, `mips`, `mips64`, `mips64le`                                            |
+| release      | no       | The release of the operating system. When omitted it's assumed it's a rolling release, like *Arch Linux*.                              |
+| version      | no       | The version of the operating system. When omitted it's assumed its a rolling version, such as *CentOS 8 Stream* and *CentOS 9 Stream*. |
+| hardware     | no       | the minimum hardware requirements                                                                                                      |
 
-The hardware is descibed as follows:
+The hardware is described as follows:
 
-Name | Required | Default | Notes
----------|----------|---------|---------
- memory | no | 2048 | It's specified in megabytes, so 2048 will be 2GB.
- storage | no | 10240 | It's specified in megabytes, so 2048 will be 2GB.
- processors | no | | See below
+| Name       | Required | Default | Notes                                             |
+|------------|----------|---------|---------------------------------------------------|
+| memory     | no       | 2048    | It's specified in megabytes, so 2048 will be 2GB. |
+| storage    | no       | 10240   | It's specified in megabytes, so 2048 will be 2GB. |
+| processors | no       |         | See below                                         |
 
- The processors is as follows:
+The processors are as follows:
 
-Name | Required | Default | Notes
----------|----------|---------|---------
- count | no | 1 | The number of processors
- cores | no | 1 | The number of processor cores per processor
+| Name  | Required | Default | Notes                                       |
+|-------|----------|---------|---------------------------------------------|
+| count | no       | 1       | The number of processors                    |
+| cores | no       | 1       | The number of processor cores per processor |
+
+Hypervisors contain the following fields:
+
+| Name    | Required | Default | Notes                       |
+|---------|----------|---------|-----------------------------|
+| vsphere | no       |         | Settings for VMware vSphere |
+
+
+| Name                 | Required | Default      | Notes                              |
+|----------------------|----------|--------------|------------------------------------|
+| disk_controller_type | no       | lsilogic     | The type of disk controller to use |
+| firmware             | no       | bios         | The type of firmware to use        |
+| guest_os_type        | no       | otherGuest64 | The type of guest OS to use        |
+| network_adapter_type | no       | vmxnet3      | The type of network adapter to use |
 
 ## Contributing
 

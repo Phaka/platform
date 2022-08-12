@@ -1,13 +1,13 @@
 name: Oracle Linux
-downloads:
-  - https://yum.oracle.com/ISOS/OracleLinux/OL8/u5/x86_64/OracleLinux-R8-U5-x86_64-dvd.iso
-documentation: https://www.oracle.com/linux/technologies/
+version: "8.5"
 architecture: x86_64
 release: "8"
-version: "8.5"
+downloads:
+    - https://yum.oracle.com/ISOS/OracleLinux/OL8/u5/x86_64/OracleLinux-R8-U5-x86_64-dvd.iso
+documentation: https://www.oracle.com/linux/technologies/
 hardware:
-  memory: 2048
-  storage: 8192
-  processors:
-    count: 1
-    cores: 1
+    memory: 2048
+    storage: 8192
+    processors:
+        count: 1
+        cores: 1

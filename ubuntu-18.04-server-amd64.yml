@@ -1,14 +1,14 @@
 name: Ubuntu
-flavor: Server
-downloads:
-  - https://releases.ubuntu.com/18.04/ubuntu-18.04.6-live-server-amd64.iso
-documentation: https://ubuntu.com/server/docs
-architecture: amd64
-release: 18.04
 version: 18.04.6
+architecture: amd64
+release: "18.04"
+downloads:
+    - https://releases.ubuntu.com/18.04/ubuntu-18.04.6-live-server-amd64.iso
+flavor: Server
+documentation: https://ubuntu.com/server/docs
 hardware:
-  memory: 512
-  storage: 2560
-  processors:
-    count: 1
-    cores: 1
+    memory: 512
+    storage: 2560
+    processors:
+        count: 1
+        cores: 1

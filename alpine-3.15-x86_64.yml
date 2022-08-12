@@ -1,13 +1,13 @@
 name: Alpine Linux
-downloads:
-  - https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-extended-3.15.5-x86_64.iso
-documentation: https://docs.alpinelinux.org/user-handbook/0.1a/index.html
-architecture: x86_64
-release: 3.15
 version: 3.15.5
+architecture: x86_64
+release: "3.15"
+downloads:
+    - https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-extended-3.15.5-x86_64.iso
+documentation: https://docs.alpinelinux.org/user-handbook/0.1a/index.html
 hardware:
-  memory: 512
-  storage: 2560
-  processors:
-    count: 1
-    cores: 1
+    memory: 512
+    storage: 2560
+    processors:
+        count: 1
+        cores: 1

@@ -1,13 +1,13 @@
 name: AlmaLinux
-downloads:
-  - http://mirror.fcix.net/almalinux/9.0/isos/x86_64/AlmaLinux-9.0-x86_64-dvd.iso
-documentation: https://wiki.almalinux.org
+version: "9"
 architecture: x86_64
-release: 9
-version: 9
+release: "9"
+downloads:
+    - http://mirror.fcix.net/almalinux/9.0/isos/x86_64/AlmaLinux-9.0-x86_64-dvd.iso
+documentation: https://wiki.almalinux.org
 hardware:
-  memory: 2048
-  storage: 40960
-  processors:
-    count: 1
-    cores: 1
+    memory: 2048
+    storage: 40960
+    processors:
+        count: 1
+        cores: 1

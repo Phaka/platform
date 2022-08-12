@@ -1,12 +1,12 @@
 name: CentOS
-downloads:
-  - http://mirror.fcix.net/centos-stream/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-latest-x86_64-dvd1.iso
-documentation: https://docs.centos.org/en-US/docs/
 architecture: x86_64
-release: 9
+release: "9"
+downloads:
+    - http://mirror.fcix.net/centos-stream/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-latest-x86_64-dvd1.iso
+documentation: https://docs.centos.org/en-US/docs/
 hardware:
-  memory: 2048
-  storage: 2560
-  processors:
-    count: 1
-    cores: 1
+    memory: 2048
+    storage: 2560
+    processors:
+        count: 1
+        cores: 1
