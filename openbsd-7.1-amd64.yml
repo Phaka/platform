@@ -15,5 +15,5 @@ hypervisors:
     vsphere:
         guest_os_type: otherGuest64
         disk_controller_type: lsilogic
-        network_adapter_type: vmxnet3
+        network_adapter_type: e1000
         firmware: bios
