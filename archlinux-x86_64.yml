@@ -9,6 +9,13 @@ hardware:
     processors:
         count: 1
         cores: 1
+boot:
+    http:
+        commands: |-
+            <enter><wait10><wait10><wait10><wait10>
+            <wait>curl -fsSL {{ .ServerUrl }}/install.sh | bash -s<enter>
+            <wait4m>
+        delay: 5s
 hypervisors:
     vsphere:
         guest_os_type: otherGuest64

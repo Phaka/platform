@@ -11,6 +11,76 @@ hardware:
     processors:
         count: 1
         cores: 1
+boot:
+    http:
+        commands: <tab> inst.text inst.ks={{ .ServerUrl }}/ks.cfg<enter><wait>
+        files:
+            ks.cfg.pkrtpl.hcl: |-
+                #version=RHEL8
+                # Use graphical install
+                text
+
+                repo --name="AppStream" --baseurl=file:///run/install/sources/mount-0000-cdrom/AppStream
+
+                %packages
+                @^minimal-environment
+
+                %end
+
+                # Keyboard layouts
+                keyboard --xlayouts='us'
+                # System language
+                lang ${ locale }
+
+                firewall --service=ssh
+
+                # Network information
+                network  --bootproto=dhcp --device=ens192 --ipv6=dhcp --activate
+                network  --hostname=rhel-8-amd64.${ domain }
+
+                # Use CDROM installation media
+                cdrom
+
+                # Run the Setup Agent on first boot
+                firstboot --disable
+                reboot
+
+                ignoredisk --only-use=sda
+                autopart --type=lvm
+                # Partition clearing information
+                clearpart --none --initlabel
+
+                # Intended system purpose
+                syspurpose --role="Red Hat Enterprise Linux Server" --sla="Self-Support" --usage="Development/Test"
+
+                # System timezone
+                timezone ${ timezone } --isUtc
+
+                # Root password
+                rootpw --iscrypted ${ password_hashed }
+
+                %addon com_redhat_kdump --disable --reserve-mb='auto'
+
+                %end
+
+                %anaconda
+                pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+                pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok
+                pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+                %end
+
+                %post --log=/root/registration_results.out
+                subscription-manager register --org=${ subscription_organization } --activationkey=${ subscription_key }
+                sed -i 's/^#?PermitRootLogin \(without-password\|forced-commands-only\|prohibit-password\|no\|yes\)/PermitRootLogin yes/' /etc/ssh/sshd_config
+                %end
+        delay: 5s
+        variables:
+            - name: locale
+            - name: domain
+            - name: timezone
+            - name: password_hashed
+            - name: subscription_organization
+            - name: subscription_key
 hypervisors:
     vsphere:
         guest_os_type: otherGuest64

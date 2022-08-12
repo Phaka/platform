@@ -11,6 +11,74 @@ hardware:
     processors:
         count: 1
         cores: 1
+boot:
+    http:
+        commands: <tab> text ks={{ .ServerUrl }}/ks.cfg<enter><wait>
+        files:
+            ks.cfg.pkrtpl.hcl: |-
+                #version=DEVEL
+                # System authorization information
+                auth --enableshadow --passalgo=sha512
+                # Use CDROM installation media
+                cdrom
+                # Use graphical install
+                text
+                # Run the Setup Agent on first boot
+                firstboot --disable
+                reboot
+                ignoredisk --only-use=sda
+                # Keyboard layouts
+                keyboard --vckeymap=us --xlayouts='us'
+                # System language
+                lang ${ locale }
+
+                # Network information
+                network  --bootproto=dhcp --device=ens192 --ipv6=dhcp --activate
+                network  --hostname=oraclelinux-7-amd64.${ domain }
+
+                repo --name="Server-HighAvailability" --baseurl=file:///run/install/repo/addons/HighAvailability
+                repo --name="Server-ResilientStorage" --baseurl=file:///run/install/repo/addons/ResilientStorage
+                # Root password
+                rootpw --iscrypted ${ password_hashed }
+                # System services
+                services --enabled=NetworkManager,sshd,chronyd
+                # System timezone
+                timezone ${ timezone } --isUtc
+                # System bootloader configuration
+                bootloader --location=mbr --boot-drive=sda
+                autopart --type=lvm
+                # Partition clearing information
+                clearpart --none --initlabel
+
+                %packages
+                @^minimal
+                @core
+                chrony
+                openssh-server
+                open-vm-tools
+                nano
+
+                %end
+
+                %addon com_redhat_kdump --disable --reserve-mb='auto'
+
+                %end
+
+                %anaconda
+                pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+                pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok
+                pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+                %end
+
+                %post
+                cat "PermitRootLogin yes" >> /etc/ssh/sshd_config
+                %end
+        delay: 5s
+        variables:
+            - name: timezone
+            - name: locale
+            - name: domain
+            - name: password_hashed
 hypervisors:
     vsphere:
         guest_os_type: otherGuest64

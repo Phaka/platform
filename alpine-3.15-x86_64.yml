@@ -11,6 +11,60 @@ hardware:
     processors:
         count: 1
         cores: 1
+boot:
+    http:
+        commands: |-
+            root<enter><wait>
+            setup-alpine<enter><wait5>
+            us<enter><wait>
+            us<enter><wait>
+            alpine<enter><wait>
+            eth0<enter><wait>
+            dhcp<enter><wait>
+            n<enter><wait15s>
+            ${ var.ssh_password }<enter><wait>
+            ${ var.ssh_password }<enter><wait>
+            ${ timezone }<enter><wait>
+            none<enter><wait>
+            none<enter><wait>
+            62<enter><wait>
+            no<enter><wait>
+            openssh<enter><wait>
+            yes<enter><wait>
+            none<enter><wait15s>
+            sda<enter><wait>
+            sys<enter><wait10s>
+            y<enter><wait30s>
+            reboot now<enter><wait30s>
+            root<enter><wait>
+            ${ var.ssh_password }<enter><wait>
+            echo \"http://mirror.fcix.net/alpine/v3.15/community/\" >> /etc/apk/repositories<enter><wait>
+            apk update<enter><wait15s>
+            apk add sudo<enter><wait5>
+            echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers.d/wheel<enter>
+            apk add python3<enter><wait10s>
+            apk add nano<enter><wait10s>
+            apk add open-vm-tools<enter><wait10s>
+            apk add open-vm-tools-guestinfo<enter><wait10s>
+            apk add open-vm-tools-deploypkg<enter><wait10s>
+            rc-update add open-vm-tools boot<enter><wait10s>
+            reboot now<enter>
+        files:
+            answers.pkrtpl.hcl: |-
+                KEYMAPOPTS="us us"
+                HOSTNAMEOPTS="-n localhost"
+                INTERFACESOPTS="auto lo
+                iface lo inet loopback
+
+                auto eth0
+                iface eth0 inet dhcp
+                "
+                TIMEZONEOPTS="-z UTC"
+                PROXYOPTS="none"
+                SSHDOPTS="-c openssh"
+                NTPOPTS="-c openntpd"
+                DISKOPTS="-m sys /dev/sda"
+        delay: 20s
 hypervisors:
     vsphere:
         guest_os_type: otherGuest64

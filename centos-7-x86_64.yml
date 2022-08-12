@@ -11,6 +11,85 @@ hardware:
     processors:
         count: 1
         cores: 1
+boot:
+    http:
+        commands: <tab> text ks={{ .ServerUrl }}/ks.cfg<enter><wait>
+        files:
+            ks.cfg.pkrtpl.hcl: |-
+                #version=DEVEL
+
+                # System authorization information
+                auth --enableshadow --passalgo=sha512
+
+                # Use CDROM installation media
+                cdrom
+
+                # Use graphical install
+                text
+
+                # Disable the Setup Agent on first boot
+                firstboot --disabled
+
+                # Agree to EULA
+                eula --agreed
+
+                ignoredisk --only-use=sda
+
+                # Keyboard layouts
+                keyboard --vckeymap=us --xlayouts='us'
+
+                # System language
+                lang ${ locale }
+
+                # Network information
+                network  --bootproto=dhcp --device=ens192 --ipv6=dhcp --activate
+                network  --hostname=centos-7-amd64.${ domain }
+
+                # Root password
+                rootpw --iscrypted ${ password_hashed }
+
+                # System services #11
+                services --enabled=NetworkManager,sshd,chronyd
+
+                # System timezone
+                timezone ${ timezone } --isUtc
+
+                # System bootloader configuration
+                bootloader --append=" crashkernel=auto" --location=mbr --boot-drive=sda
+                autopart --type=lvm
+
+                # Partition clearing information
+                clearpart --all --initlabel --drives=sda
+
+                reboot
+
+                %packages
+                @^minimal
+                @core
+                chrony
+                kexec-tools
+
+                %end
+
+                %addon com_redhat_kdump --enable --reserve-mb='auto'
+
+                %end
+
+                %anaconda
+                pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+                pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok
+                pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+                %end
+
+                %post
+                cat "PermitRootLogin yes" >> /etc/ssh/sshd_config
+                %end
+        delay: 5s
+        variables:
+            - name: locale
+            - name: domain
+            - name: password_hashed
+            - name: timezone
 hypervisors:
     vsphere:
         guest_os_type: centos7_64Guest

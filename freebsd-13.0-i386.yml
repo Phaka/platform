@@ -11,6 +11,94 @@ hardware:
     processors:
         count: 1
         cores: 1
+boot:
+    http:
+        commands: |-
+            <enter><wait10><wait10>
+            <tab><enter><wait>
+            ifconfig<enter><wait>
+            mkdir /tmp/etc<enter><wait>
+            mount -t unionfs /tmp/etc /etc<enter><wait>
+            rm /etc/resolv.conf<enter><wait>
+            dhclient -p /tmp/dhclient.pid -l /tmp/dhclient.lease vmx0<enter><wait10>
+            fetch -o /tmp/installerconfig {{ .ServerUrl }}/installerconfig<enter><wait10>
+            bsdinstall script /tmp/installerconfig<enter>
+            <wait10><wait10>
+        files:
+            installerconfig.pkrtpl.hcl: |-
+                export DISTRIBUTIONS="base.txz kernel.txz ports.txz src.txz"
+                # export BSDINSTALL_DISTDIR="/media"
+                for d in ada0 da0 vtbd0; do
+                if [ -e "/dev/$d" ]; then
+                export ZFSBOOT_DISKS=$d
+                break
+                fi
+                done
+                unset d
+
+                export nonInteractive="YES"
+
+                #!/bin/sh
+
+                cat > /etc/rc.conf << EOL
+                zfs_enable="YES"
+                dumpdev="NO"
+                sshd_enable="YES"
+                hostname="freebsd"
+                sendmail_enable="NONE"
+                syslogd_flags="-ss"
+                clear_tmp_enable="YES"
+
+                hald_enable="YES"
+                moused_enable="YES"
+                dbus_enable="YES"
+                vmware_guest_vmblock_enable="YES"
+                vmware_guest_vmmemctl_enable="YES"
+                vmware_guest_vmxnet_enable="YES"
+                vmware_guestd_enable="YES"
+                EOL
+
+                interface="`ifconfig -l | cut -d' ' -f1`"
+                sysrc ifconfig_$interface="SYNCDHCP"
+
+                cat > /boot/loader.conf << EOL
+                kern.geom.label.disk_ident.enable="0"
+                kern.geom.label.gptid.enable="0"
+                opensolaris_load="YES"
+                zfs_load="YES"
+                autoboot_delay="2"
+                if_vmx_load="YES"
+                # pvscsi_load="YES"
+                ums_load="YES"
+                EOL
+
+                # Create Packer User
+                echo "${ packer_password }" | pw useradd "${ packer_username }" -h 0 -G wheel -m
+                echo "${ ssh_password }" | pw usermod root -h 0
+
+                # Package Management
+                pkg install -y nano sudo curl open-vm-tools-nox11
+
+                # SSHD
+                echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
+                # Sudoers
+                mkdir -p /usr/local/etc/sudoers.d
+                cat <<EOS > /usr/local/etc/sudoers.d/${ packer_username }
+                Defaults:packer !requiretty
+                ${ packer_username } ALL=(ALL) NOPASSWD: ALL
+                EOS
+                chmod 440 /usr/local/etc/sudoers.d/${ packer_username }
+
+                # Update FreeBSD
+                env PAGER=/bin/cat /usr/sbin/freebsd-update --not-running-from-cron fetch install
+
+                reboot
+        delay: 5s
+        variables:
+            - name: packer_password
+            - name: packer_username
+            - name: ssh_password
 hypervisors:
     vsphere:
         guest_os_type: freebsd12Guest

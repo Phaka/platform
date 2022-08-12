@@ -11,6 +11,67 @@ hardware:
     processors:
         count: 1
         cores: 1
+boot:
+    http:
+        commands: <tab> text ks={{ .ServerUrl }}/ks.cfg<enter><wait>
+        files:
+            ks.cfg.pkrtpl.hcl: |-
+                #version=OL8
+                # Use graphical install
+                text
+
+                repo --name="AppStream" --baseurl=file:///run/install/sources/mount-0000-cdrom/AppStream
+
+                %packages
+                @^minimal-environment
+                open-vm-tools
+                nano
+                openssh-server
+                %end
+
+                # Keyboard layouts
+                keyboard --xlayouts='us'
+                # System language
+                lang ${ locale }
+
+                # Network information
+                network  --bootproto=dhcp --device=ens192 --ipv6=dhcp --activate
+                network  --hostname=oraclelinux-8-amd64.${ domain }
+
+                # Use CDROM installation media
+                cdrom
+
+                # Run the Setup Agent on first boot
+                firstboot --disable
+
+                ignoredisk --only-use=sda
+                autopart
+                # Partition clearing information
+                clearpart --none --initlabel
+
+                # System timezone
+                timezone ${ timezone } --isUtc
+
+                # Root password
+                rootpw --iscrypted ${ password_hashed }
+
+                reboot
+
+                %addon com_redhat_kdump --disable --reserve-mb='auto'
+
+                %end
+
+                %anaconda
+                pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+                pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok
+                pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+                %end
+        delay: 5s
+        variables:
+            - name: locale
+            - name: domain
+            - name: timezone
+            - name: password_hashed
 hypervisors:
     vsphere:
         guest_os_type: otherGuest64

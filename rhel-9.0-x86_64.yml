@@ -11,6 +11,70 @@ hardware:
     processors:
         count: 1
         cores: 1
+boot:
+    http:
+        commands: <tab> inst.text inst.ks={{ .ServerUrl }}/ks.cfg<enter><wait>
+        files:
+            ks.cfg.pkrtpl.hcl: |-
+                #version=RHEL9
+                # Use graphical install
+                text
+                repo --name="AppStream" --baseurl=file:///run/install/sources/mount-0000-cdrom/AppStream
+
+                %addon com_redhat_kdump --disable
+
+                %end
+
+                # Keyboard layouts
+                keyboard --xlayouts='us'
+                # System language
+                lang ${ locale }
+
+                firewall --service=ssh
+
+                # Network information
+                network  --bootproto=dhcp --device=ens192 --ipv6=dhcp --activate
+                network  --hostname=rhel-9-amd64.${ domain }
+
+                # Use CDROM installation media
+                cdrom
+
+                syspurpose --role="Red Hat Enterprise Linux Server" --sla="Self-Support" --usage="Development/Test"
+
+                %packages
+                @^minimal-environment
+                @standard
+
+                %end
+
+                # Run the Setup Agent on first boot
+                firstboot --disable
+                reboot
+
+                # Generated using Blivet version 3.4.0
+                ignoredisk --only-use=sda
+                autopart
+                # Partition clearing information
+                clearpart --none --initlabel
+
+                # System timezone
+                timezone ${ timezone } --utc
+
+                # Root password
+                rootpw --iscrypted ${ password_hashed }
+
+                %post --log=/root/registration_results.out
+                subscription-manager register --org=${ subscription_organization } --activationkey=${ subscription_key }
+                sed -i 's/^#?PermitRootLogin \(without-password\|forced-commands-only\|prohibit-password\|no\|yes\)/PermitRootLogin yes/' /etc/ssh/sshd_config
+                %end
+        delay: 5s
+        variables:
+            - name: subscription_organization
+            - name: subscription_key
+            - name: locale
+            - name: domain
+            - name: timezone
+            - name: password_hashed
 hypervisors:
     vsphere:
         guest_os_type: otherGuest64

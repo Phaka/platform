@@ -11,6 +11,54 @@ hardware:
     processors:
         count: 1
         cores: 1
+boot:
+    http:
+        commands: |-
+            1<wait10><wait10><wait10>
+            a<enter><wait>
+            b<enter><wait>
+            a<enter><wait>
+            b<enter><wait>
+            a<enter><wait>
+            a<enter><wait>
+            a<enter><wait>
+            b<enter><wait>
+            x<enter><wait>
+            b<enter><wait5s>
+            a<enter><wait5s>
+            b<enter><wait>
+            a<enter>
+            <wait2m>
+            <enter><wait>
+            d<enter><wait5s>
+            a<enter><wait5s>
+            ${var.ssh_password}<enter><wait5s>
+            ${var.ssh_password}<enter><wait5s>
+            g<enter><wait>
+            h<enter><wait>
+            x<enter><wait>
+            <enter><wait10>
+            x<enter><wait>
+            mount /dev/dk0 /mnt<enter><wait>
+            sed -i 's/#UseDNS [a-z][a-z-]*$/UseDNS no/' /mnt/etc/ssh/sshd_config<enter><wait>
+            sed -i 's/^#PermitRootLogin [a-z][a-z-]*$/PermitRootLogin yes/' /mnt/etc/ssh/sshd_config<enter><wait>
+            sed -i 's/^#PasswordAuthentication [a-z][a-z-]*$/PasswordAuthentication yes/' /mnt/etc/ssh/sshd_config<enter><wait>
+            cat >> /mnt/etc/rc.conf << EOF<enter>
+            dhcpcd=YES<enter>
+            rpcbind=YES<enter>
+            no_swap=YES<enter>
+            statd=YES<enter>
+            hostname=netbsd.local<wait><enter>
+            EOF<enter><wait>
+            umount /mnt<enter><wait>
+            reboot<enter><wait1m>
+            root<enter><wait5s>
+            ${var.ssh_password}<enter><wait10s>
+            printf "\n127.0.0.1    netbsd netbsd.local\n" >> /etc/hosts<enter><wait>
+            echo "netbsd.local" > /etc/myname<enter><wait>
+            hostname netbsd.local<enter><wait>
+            reboot<enter>
+        delay: 5s
 hypervisors:
     vsphere:
         guest_os_type: otherGuest
