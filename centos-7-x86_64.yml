@@ -11,3 +11,9 @@ hardware:
     processors:
         count: 1
         cores: 1
+hypervisors:
+    vsphere:
+        guest_os_type: centos7_64Guest
+        disk_controller_type: pvscsi
+        network_adapter_type: vmxnet3
+        firmware: bios

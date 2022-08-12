@@ -11,3 +11,9 @@ hardware:
     processors:
         count: 1
         cores: 1
+hypervisors:
+    vsphere:
+        guest_os_type: otherGuest
+        disk_controller_type: lsilogic
+        network_adapter_type: e1000
+        firmware: bios
