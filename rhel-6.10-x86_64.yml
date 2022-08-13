@@ -87,10 +87,17 @@ boot:
         delay: 5s
         variables:
             - name: locale
+              default: en_US.UTF-8
+              type: string
             - name: password_hashed
-            - name: timezone
-            - name: subscription_organization
+              type: string
             - name: subscription_key
+              type: string
+            - name: subscription_organization
+              type: string
+            - name: timezone
+              default: America/Los_Angeles
+              type: string
 hypervisors:
     vsphere:
         guest_os_type: otherGuest64

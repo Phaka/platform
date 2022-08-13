@@ -102,8 +102,13 @@ boot:
         delay: 5s
         variables:
             - name: locale
-            - name: ssh_username
+              default: en_US.UTF-8
+              type: string
             - name: ssh_password
+              type: string
+            - name: ssh_username
+              default: root
+              type: string
 hypervisors:
     vsphere:
         guest_os_type: debian10Guest

@@ -62,8 +62,13 @@ boot:
         delay: 5s
         variables:
             - name: hostname
-            - name: ssh_username
+              default: phaka
+              type: string
             - name: ssh_password_hashed
+              type: string
+            - name: ssh_username
+              default: root
+              type: string
 hypervisors:
     vsphere:
         guest_os_type: ubuntu64Guest
